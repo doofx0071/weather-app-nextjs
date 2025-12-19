@@ -253,7 +253,12 @@ export default function Home() {
                         {new Date(item.searched_at).toLocaleTimeString()} <br />
                         <em>{item.weather_description || 'No description'}</em>
                         <button
-                          onClick={(e) => { e.stopPropagation(); deleteHistory(item.id); }}
+                          onClick={async (e) => { 
+                            e.stopPropagation(); 
+                            await deleteHistory(item.id); 
+                            const hist = await getHistory();
+                            setHistory(hist);
+                          }}
                           className="delete-btn"
                         >
                           ×
